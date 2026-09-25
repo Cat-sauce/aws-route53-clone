@@ -1,4 +1,3 @@
-```markdown
 # AWS Route 53 Management Console Clone
 
 A full-stack replica of the Amazon Route 53 DNS management console. The application includes a public AWS marketing landing portal, an IAM-style sign-in workflow, and an AWS Cloudscape-inspired console dashboard to manage hosted zones and DNS record sets.
@@ -15,21 +14,26 @@ A full-stack replica of the Amazon Route 53 DNS management console. The applicat
 
 ## Architecture Flow
 
-
 ```
-
 [ User Browser ]
-|
-v
+       |
+       v
 [ Next.js Frontend (Vercel) ]
-|-- Public Portal (/)
-|-- Authentication Mock (/signin)
-|-- Hosted Zones Console (/console)
-`-- Record Set Manager (/hosted-zones/[zoneId]) | | REST API (JSON / CORS) v [ FastAPI Backend (Render) ] |-- Routers (/api/hosted-zone, /api/records) |-- Validation (Pydantic Schemas) |-- Auto-generation (NS & SOA on zone creation) `-- ORM (SQLAlchemy)
-|
-v
+   |-- Public Portal (/)
+   |-- Authentication Mock (/signin)
+   |-- Hosted Zones Console (/console)
+   `-- Record Set Manager (/hosted-zones/[zoneId])
+       |
+       | REST API (JSON / CORS)
+       v
+[ FastAPI Backend (Render) ]
+   |-- Routers (/api/hosted-zone, /api/records)
+   |-- Validation (Pydantic Schemas)
+   |-- Auto-generation (NS & SOA on zone creation)
+   `-- ORM (SQLAlchemy)
+       |
+       v
 [ SQLite Database (route53.db) ]
-
 ```
 
 ---
@@ -69,7 +73,6 @@ source venv/bin/activate
 
 pip install -r requirements.txt
 uvicorn main:app --reload --host 127.0.0.1 --port 8000
-
 ```
 
 The API will be available at `http://127.0.0.1:8000` and interactive docs at `http://127.0.0.1:8000/docs`.
@@ -84,7 +87,6 @@ npm install
 echo "NEXT_PUBLIC_API_URL=[http://127.0.0.1:8000](http://127.0.0.1:8000)" > .env.local
 
 npm run dev
-
 ```
 
 Open `http://localhost:3000` in your browser.
@@ -96,21 +98,17 @@ Open `http://localhost:3000` in your browser.
 ### Frontend (`frontend/.env.local` or Vercel Settings)
 
 | Variable | Description | Example |
-| --- | --- | --- |
+| :--- | :--- | :--- |
 | `NEXT_PUBLIC_API_URL` | Base URL of the FastAPI backend | `https://aws-route53-clone-gctk.onrender.com` |
 
 ---
 
 ## API Endpoints Overview
 
-* `GET /health` - Health check status
-* `GET /api/hosted-zone` - List hosted zones (supports search filtering)
-* `POST /api/hosted-zone` - Create a new hosted zone
-* `DELETE /api/hosted-zone/{id}` - Delete a hosted zone and its associated records
-* `GET /api/hosted-zone/{id}/records` - List records within a zone
-* `POST /api/hosted-zone/{id}/records` - Create a DNS record
-* `DELETE /api/hosted-zone/{id}/records/{record_id}` - Delete a DNS record
-
-```
-
-```
+- `GET /health` - Health check status
+- `GET /api/hosted-zone` - List hosted zones (supports search filtering)
+- `POST /api/hosted-zone` - Create a new hosted zone
+- `DELETE /api/hosted-zone/{id}` - Delete a hosted zone and its associated records
+- `GET /api/hosted-zone/{id}/records` - List records within a zone
+- `POST /api/hosted-zone/{id}/records` - Create a DNS record
+- `DELETE /api/hosted-zone/{id}/records/{record_id}` - Delete a DNS record
