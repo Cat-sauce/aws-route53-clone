@@ -1,0 +1,38 @@
+# Python & Virtual Environments
+backend/__pycache__/
+backend/*/__pycache__/
+backend/*/*/__pycache__/
+*.py[cod]
+*$py.class
+backend/venv/
+backend/.venv/
+backend/env/
+venv/
+.venv/
+env/
+*.db
+*.sqlite3
+
+# Node & Next.js
+frontend/node_modules/
+node_modules/
+frontend/.next/
+.next/
+frontend/out/
+build/
+dist/
+.pnp
+.pnp.js
+
+# Environment Variables & Secrets
+*.env
+.env
+.env.local
+.env.*.local
+
+# OS & IDE Junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
